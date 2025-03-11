@@ -1,0 +1,54 @@
+prometheus:
+  prometheusSpec:
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "1Gi"
+#    storageSpec:
+#      volumeClaimTemplate:
+#        spec:
+#          accessModes: ["ReadWriteOnce"]
+#          resources:
+#            requests:
+#              storage: 25Gi  # Set to 25GB
+#          storageClassName: "gp3"  # Set storage class to gp3
+
+alertmanager:
+  enabled: false
+
+# Uncomment and configure if Alertmanager requires persistent storage
+#  alertmanagerSpec:
+#    storage:
+#      volumeClaimTemplate:
+#        spec:
+#          accessModes: ["ReadWriteOnce"]
+#          resources:
+#            requests:
+#              storage: 5Gi
+
+# Uncomment and configure if Grafana requires persistent storage
+grafana:
+  enabled: false
+#  persistence:
+#    enabled: true
+#    storageClassName: "gp3"  # Set storage class to gp3
+#    accessModes: ["ReadWriteOnce"]
+#    size: 25Gi
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "1000Mi"
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "20Mi"
+
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "6Mi"

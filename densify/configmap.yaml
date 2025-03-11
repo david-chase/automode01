@@ -1,0 +1,23 @@
+apiVersion :  v1
+kind :  ConfigMap
+metadata :
+  name :  densifyconf 
+  namespace: densify
+data : 
+  config.yaml : |
+    forwarder:
+        densify:
+            url:
+                scheme: https
+                host: densifytest.densify.com
+                port: 443
+                username: forwarder
+                encrypted_password: v117e99fe4f74c299f9275106fcb890cb9ab0af38336a46c7e0372081525a76640d2a9d71b245c0b140155cfd4ffeba57c7a3a1f01d44f1ce84c8a54241efc2be9
+            endpoint: /api/v2/
+    prometheus:
+        url:
+            scheme: http
+            host: prometheus-kube-prometheus-prometheus
+            port: 9090
+    clusters:
+        - name: automode01-before

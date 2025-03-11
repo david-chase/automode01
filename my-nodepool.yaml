@@ -1,0 +1,54 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  annotations:
+    karpenter.sh/nodepool-hash-version: v3
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: eks
+  name: my-nodepool
+spec:
+  disruption:
+    budgets:
+    - nodes: 10%
+    consolidateAfter: 30s
+    consolidationPolicy: WhenEmptyOrUnderutilized
+  limits:
+    # Allow us to scale to 0 nodes
+    min: 0
+  template:
+    metadata:
+      labels:
+        node.kubernetes.io/role: worker
+    spec:
+      nodeClassRef:
+        group: eks.amazonaws.com
+        kind: NodeClass
+        name: default
+      requirements:
+      - key: "topology.kubernetes.io/zone"
+        operator: In
+        # Force all nodes into the same AZ so they can all reach our EBS volume
+        values: ["us-east-2b"]        
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values:
+        # Enable spot instances as the default
+        - spot
+        - on-demand
+      - key: node.kubernetes.io/instance-type
+        operator: In
+        values:
+        # Only allow c6a.large instance types.  We want C-family so Densify can recommend a more appropriate family and a small node type so we tend to scale up lots of nodes
+        - c6a.large
+        - c6a.xlarge
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+        - amd64
+      - key: kubernetes.io/os
+        operator: In
+        values:
+        - linux
+      terminationGracePeriod: 24h0m0s
+      
