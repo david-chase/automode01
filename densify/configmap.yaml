@@ -17,7 +17,7 @@ data :
     prometheus:
         url:
             scheme: http
-            host: prometheus-kube-prometheus-prometheus
+            host: prometheus-kube-prometheus-prometheus.monitoring.svc
             port: 9090
     clusters:
-        - name: automode01-before
+        - name: am01b4
