@@ -20,4 +20,4 @@ data :
             host: prometheus-kube-prometheus-prometheus.monitoring.svc
             port: 9090
     clusters:
-        - name: am01b4
+        - name: am01b5

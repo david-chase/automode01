@@ -25,24 +25,3 @@ helm install prometheus prometheus-community/kube-prometheus-stack `
  #   --set server.persistentVolume.storageClass="default" `
  #   --set alertmanager.persistentVolume.enabled=false `
  #   --set server.persistentVolume.enabled=false
-
-Write-Host `nAre you installing this on a managed Kubernetes service? [Y/n] -ForegroundColor Cyan
-$sInput = Read-Host
-
-if( $sInput.ToLower() -ne "n" ) {
-# Disable data collection for system namespaces
-    Write-Host `nUpdating Helm deployment... -ForegroundColor Cyan
-
-    Write-Host "helm upgrade prometheus `
-    prometheus-community/kube-prometheus-stack `
-    --namespace monitoring `
-    --set kubeEtcd.enabled=false `
-    --set kubeControllerManager.enabled=false `
-    --set kubeScheduler.enabled=false" -ForegroundColor Green
-    helm upgrade prometheus `
-    prometheus-community/kube-prometheus-stack `
-    --namespace monitoring `
-    --set kubeEtcd.enabled=false `
-    --set kubeControllerManager.enabled=false `
-    --set kubeScheduler.enabled=false 
-} # if( $sInput.ToLower() -ne "n" )

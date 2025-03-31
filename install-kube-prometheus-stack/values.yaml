@@ -2,8 +2,10 @@ prometheus:
   prometheusSpec:
     resources:
       requests:
-        cpu: "10m"
-        memory: "1Gi"
+        cpu: "60m"
+        memory: "1410Mi"
+      limits:
+        memory: "2310Mi"
 #    storageSpec:
 #      volumeClaimTemplate:
 #        spec:
@@ -39,16 +41,22 @@ prometheusOperator:
   resources:
     requests:
       cpu: "10m"
-      memory: "1000Mi"
+      memory: "60Mi"
+    limits:
+      memory: "110Mi"
 
 kube-state-metrics:
   resources:
     requests:
       cpu: "10m"
-      memory: "20Mi"
+      memory: "60Mi"
+    limits:
+      memory: "60Mi"
 
 prometheus-node-exporter:
   resources:
     requests:
       cpu: "10m"
-      memory: "6Mi"
+      memory: "60Mi"
+    limits:
+      memory: "60Mi"
