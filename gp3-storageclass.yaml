@@ -4,7 +4,7 @@ metadata:
   name: gp3  # Name the new StorageClass as 'gp3'
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"  # Optional: make it the default StorageClass
-provisioner: ebs.csi.aws.com
+provisioner: ebs.csi.eks.amazonaws.com
 reclaimPolicy: Retain
 # volumeBindingMode: WaitForFirstConsumer
 volumeBindingMode: Immediate
